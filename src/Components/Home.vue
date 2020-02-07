@@ -24,4 +24,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.btn-primary:hover {
+    background-color: #007bff;
+}
+</style>

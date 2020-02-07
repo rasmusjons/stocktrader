@@ -31,10 +31,12 @@
                         </router-link>
                     </li>
 
-                    <li class="nav-item">
-                        <a @click="randomizeStocks" class="nav-link" href="#">End day</a>
+                    <li class="nav-item" id="endDay">
+                        <router-link to="#">
+                            <a @click="randomizeStocks" class="nav-link" href="#">End day</a>
+                        </router-link>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" id="saveLoad">
                         <a
                             class="nav-link dropdown-toggle"
                             href="#"
@@ -126,6 +128,19 @@ export default {
     height: 25px;
 }
 
+#endDay {
+    border: dotted 1px rgba(123, 118, 118, 0.87);
+    border-radius: 10px;
+}
+
+#endDay a {
+    text-decoration: none;
+}
+#saveLoad {
+    border: dotted 1px rgba(123, 118, 118, 0.87);
+    border-radius: 10px;
+}
+
 @keyframes ticker {
     0% {
         transform: translate3d(0, 0, 0);
@@ -154,9 +169,7 @@ export default {
     animation-duration: 90s;
     background: #343a40;
 }
-.ticker-move:hover {
-    animation-play-state: paused;
-}
+
 .ticker-item {
     display: inline-block;
     padding: 0 2rem;

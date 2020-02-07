@@ -6,8 +6,8 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     stocks: [
-      { id: 0, name: "Google", price: 100, owned: 100 },
-      { id: 1, name: "Apple", price: 1, owned: 10 },
+      { id: 0, name: "Google", price: 100, owned: 0 },
+      { id: 1, name: "Apple", price: 100, owned: 0 },
       { id: 2, name: "Tesla", price: 100, owned: 0 },
       { id: 3, name: "Volvo", price: 100, owned: 0 }
     ],
