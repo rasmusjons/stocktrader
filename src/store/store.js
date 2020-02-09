@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 
 Vue.use(Vuex);
 
@@ -7,11 +8,11 @@ export const store = new Vuex.Store({
   state: {
     stocks: [
       { id: 0, name: "Google", price: 100, owned: 0 },
-      { id: 1, name: "Apple", price: 100, owned: 0 },
-      { id: 2, name: "Tesla", price: 100, owned: 0 },
-      { id: 3, name: "Volvo", price: 100, owned: 0 }
+      { id: 1, name: "Apple", price: 200, owned: 0 },
+      { id: 2, name: "Tesla", price: 150, owned: 0 },
+      { id: 3, name: "Volvo", price: 90, owned: 0 }
     ],
-    founds: 1000
+    founds: 10000
   },
   mutations: {
     SELL_STOCKS(state, payload) {
@@ -37,6 +38,29 @@ export const store = new Vuex.Store({
       let quantity = parseInt(payload.quantity);
       state.stocks[payload.id].owned += quantity;
       state.founds -= payload.price * quantity;
+    },
+    SAVE(state) {
+      axios
+        .post("https://stocktrader-ca054.firebaseio.com/log.json", state)
+        .then(res => console.log(res))
+        .catch(error => console.log(error));
+    },
+    LOAD(state) {
+      axios
+        .get("https://stocktrader-ca054.firebaseio.com/log.json", state)
+        .then(res => {
+          const data = res.data;
+          const states = [];
+          for (let key in data) {
+            const state = data[key];
+            state.id = key;
+            states.push(state);
+          }
+          console.log(states);
+          state.founds = states[states.length - 1].founds;
+          state.stocks = states[states.length - 1].stocks;
+        })
+        .catch(error => console.log(error));
     }
   },
 
@@ -53,6 +77,14 @@ export const store = new Vuex.Store({
     randomizeStocks: ({ commit }) => {
       console.log("randomize stock");
       commit("RANDOM_STOCKS");
+    },
+    save: ({ commit }) => {
+      console.log("save action");
+      commit("SAVE");
+    },
+    load: ({ commit }) => {
+      console.log("load action");
+      commit("LOAD");
     }
   },
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form>
+        <form v-if="propStocks.owned >0">
             <div class="form-group">
                 <label>Name: {{ propStocks.name }} & Price: {{propStocks.price }}</label>
                 <input type="number" min="0" class="form-control" v-model="quantity" />
