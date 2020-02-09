@@ -1,2 +1,5 @@
 1. End day ska generera nya random kurser inom en viss rimlighet.  DONE!
-2. 
+2. fixa spara och ladda
+3. hämta riktiga priser från api 
+4. byta från firebase till mongodb. 
+
