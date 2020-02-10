@@ -1,36 +1,38 @@
 <template>
-    <div class="wrapper">
-        <appStockInPortfolio v-for="(stockLoop, index) in stocks" :propStocks="stockLoop"></appStockInPortfolio>
-    </div>
+  <div class="wrapper">
+    <appStockInPortfolio
+      v-for="(stockLoop, index) in stocks"
+      :propStocks="stockLoop"
+    ></appStockInPortfolio>
+  </div>
 </template>
 
 <script>
 import StockInPortfolio from "./StockInPortfolio";
 
 export default {
-    components: {
-        appStockInPortfolio: StockInPortfolio
-    },
+  components: {
+    appStockInPortfolio: StockInPortfolio
+  },
 
-    computed: {
-        stocks() {
-            return this.$store.getters.stocks;
-        }
+  computed: {
+    stocks() {
+      return this.$store.getters.stocks;
     }
+  }
 };
 </script>
 
-<style  scoped>
+<style scoped>
 h5 {
-    padding: 10px;
-    font-size: small;
+  padding: 10px;
+  font-size: small;
 }
 
 .wrapper {
-    display: flex;
-    height: 300px;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  height: 300px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 </style>
-

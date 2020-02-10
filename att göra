@@ -1,5 +1,5 @@
 1. End day ska generera nya random kurser inom en viss rimlighet.  DONE!
 2. fixa spara och ladda          DONE!
 3. hämta riktiga priser från api    DONE!
-4. byta från firebase till mongodb. 
+4. byta från firebase till mongodb och bygga upp en liten backend  
 

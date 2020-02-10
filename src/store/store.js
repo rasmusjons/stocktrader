@@ -20,16 +20,20 @@ export const store = new Vuex.Store({
 
       state.stocks[payload.id].owned -= quantity;
       state.founds += payload.price * quantity;
+      state.founds.toFixed(2);
     },
     RANDOM_STOCKS(state) {
       for (let i = 0; i < state.stocks.length; i++) {
         let plusOrMinus = Math.random() < 0.5 ? -1 : 1;
-        let randomNumber = Math.floor(Math.random() * 7) * plusOrMinus;
-        if (state.stocks[i].price + randomNumber > 0) {
-          state.stocks[i].price += randomNumber;
-          state.stocks[i].price.toFixed(2);
-        } else {
+
+        let randomNumber = Math.round(1 + Math.random() * 8 * plusOrMinus);
+        // let decimals = Math.random().toFixed(2);
+        // randomNumber -= decimals;
+        state.stocks[i].price += randomNumber;
+
+        if (state.stocks[i].price <= 0) {
           state.stocks[i].price = 0;
+          console.log("000");
         }
       }
     },
@@ -60,6 +64,7 @@ export const store = new Vuex.Store({
           console.log(states);
           state.founds = states[states.length - 1].founds;
           state.stocks = states[states.length - 1].stocks;
+          state.owned = states[states.length - 1].owned;
         })
         .catch(error => console.log(error));
     },
@@ -96,10 +101,10 @@ export const store = new Vuex.Store({
               console.log(myStockList);
             }
           }
-          state.stocks[0].price = myStockList[0].price;
-          state.stocks[1].price = myStockList[1].price;
-          state.stocks[2].price = myStockList[2].price;
-          state.stocks[3].price = myStockList[3].price;
+          state.stocks[0].price = Math.round(myStockList[0].price);
+          state.stocks[1].price = Math.round(myStockList[1].price);
+          state.stocks[2].price = Math.round(myStockList[2].price);
+          state.stocks[3].price = Math.round(myStockList[3].price);
         })
         .catch(error => {
           console.log(error);
