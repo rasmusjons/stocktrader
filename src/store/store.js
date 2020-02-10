@@ -7,10 +7,10 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     stocks: [
-      { id: 0, name: "Google", price: 100, owned: 0 },
-      { id: 1, name: "Apple", price: 200, owned: 0 },
-      { id: 2, name: "Tesla", price: 150, owned: 0 },
-      { id: 3, name: "Volvo", price: 90, owned: 0 }
+      { id: 0, name: "Google", price: "", owned: 0 },
+      { id: 1, name: "Apple", price: "", owned: 0 },
+      { id: 2, name: "Tesla", price: "", owned: 0 },
+      { id: 3, name: "The Cheesecake Factory", price: "", owned: 0 }
     ],
     founds: 10000
   },
@@ -27,6 +27,7 @@ export const store = new Vuex.Store({
         let randomNumber = Math.floor(Math.random() * 7) * plusOrMinus;
         if (state.stocks[i].price + randomNumber > 0) {
           state.stocks[i].price += randomNumber;
+          state.stocks[i].price.toFixed(2);
         } else {
           state.stocks[i].price = 0;
         }
@@ -61,6 +62,48 @@ export const store = new Vuex.Store({
           state.stocks = states[states.length - 1].stocks;
         })
         .catch(error => console.log(error));
+    },
+
+    GET_DATA(state) {
+      console.log(state);
+
+      let data = {
+        url: "https://financialmodelingprep.com/api/v3/stock/real-time-price",
+
+        loaded: false,
+        searchQuery: ""
+      };
+      axios
+
+        .get(data.url)
+        .then(response => {
+          let myStockList = [];
+          for (let i = 0; i < response.data.stockList.length; i++) {
+            if (response.data.stockList[i].symbol === "GOOGL") {
+              myStockList.push(response.data.stockList[i]);
+              console.log(myStockList);
+            }
+            if (response.data.stockList[i].symbol === "AAPL") {
+              myStockList.push(response.data.stockList[i]);
+              console.log(myStockList);
+            }
+            if (response.data.stockList[i].symbol === "TSLA") {
+              myStockList.push(response.data.stockList[i]);
+              console.log(myStockList);
+            }
+            if (response.data.stockList[i].symbol === "CAKE") {
+              myStockList.push(response.data.stockList[i]);
+              console.log(myStockList);
+            }
+          }
+          state.stocks[0].price = myStockList[0].price;
+          state.stocks[1].price = myStockList[1].price;
+          state.stocks[2].price = myStockList[2].price;
+          state.stocks[3].price = myStockList[3].price;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   },
 
@@ -85,6 +128,10 @@ export const store = new Vuex.Store({
     load: ({ commit }) => {
       console.log("load action");
       commit("LOAD");
+    },
+    getData: ({ commit }) => {
+      console.log("getData action");
+      commit("GET_DATA");
     }
   },
 
