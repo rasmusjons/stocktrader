@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form>
+    <form v-on:click.prevent>
       <div class="form-group">
         <label
           >Name: {{ propStocks.name }} & Price: {{ propStocks.price }}</label
@@ -8,7 +8,7 @@
         <input type="number" min="0" class="form-control" v-model="quantity" />
         <button
           class="btn btn-primary"
-          @click="
+          @click.prevent="
             buyStock({
               quantity: quantity,
               id: propStocks.id,
@@ -31,7 +31,6 @@ import axios from "axios";
 import { mapActions } from "vuex";
 export default {
   props: ["propStocks"],
-
   data() {
     return {
       quantity: 0
@@ -52,13 +51,11 @@ export default {
 form {
   margin-top: 40px;
   margin: 5px;
-
   width: 400px;
   background-color: aliceblue;
   padding: 12px;
   border-radius: 3px;
 }
-
 label {
   background-color: #007bff;
   color: white;
@@ -66,12 +63,10 @@ label {
   width: 100%;
   padding: 5px;
 }
-
 form button {
   float: right;
   margin: 10px;
 }
-
 h5 {
   padding: 10px;
   font-size: small;

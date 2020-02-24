@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <appStockInPortfolio
+      v-if="founds != 10000"
       v-for="(stockLoop, index) in stocks"
       :propStocks="stockLoop"
     ></appStockInPortfolio>
@@ -18,6 +19,9 @@ export default {
   computed: {
     stocks() {
       return this.$store.getters.stocks;
+    },
+    founds() {
+      return this.$store.getters.founds;
     }
   }
 };

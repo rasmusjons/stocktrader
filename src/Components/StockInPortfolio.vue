@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h5 v-if="propStocks.owned <= 0">Please buy stocks</h5>
-
-    <form v-else>
+    <form v-on:click.prevent>
       <div class="form-group">
         <label
           >Name: {{ propStocks.name }} & Price: {{ propStocks.price }}</label
@@ -29,10 +27,8 @@
 
 <script>
 import { mapActions } from "vuex";
-
 export default {
   props: ["propStocks"],
-
   data() {
     return {
       quantity: 0
@@ -56,13 +52,11 @@ export default {
 form {
   margin-top: 40px;
   margin: 5px;
-
   width: 400px;
   background-color: aliceblue;
   padding: 12px;
   border-radius: 3px;
 }
-
 label {
   background-color: goldenrod;
   color: white;
@@ -70,12 +64,10 @@ label {
   width: 100%;
   padding: 5px;
 }
-
 form button {
   float: right;
   margin: 10px;
 }
-
 .btn-primary {
   background-color: goldenrod;
   border: 0;
